@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>ブラウザで動く言語色々</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"><link rel="stylesheet" href="css/reveal.css"><link id="theme" rel="stylesheet" href="css/theme/simple.css"><!-- Code syntax highlighting--><link rel="stylesheet" href="lib/css/zenburn.css"><!-- Printing and PDF exports--><script>var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--if lt IE 9script(src='lib/js/html5shiv.js')
+--></head><body><div class="reveal"><div class="slides"><section><h1>ブラウザで動く言語色々</h1><p><small><a href="http://twitter.com/narazaka">@narazaka</a></small></p></section><section><h2>自己紹介</h2><div><img src="icon.gif" width="100"><img src="na_blue.png" width="100"></div><ul><li>Twitter: @narazaka</li><li>Github: @Narazaka</li><li>npm: @narazaka</li><li>CPAN: NARAZAKA</li><li>ドリコム2015新卒 サーバーサイドRuby</li><li>好きな言語: Perl / CoffeeScript / Ruby / C#</li><li>その他: 伺か/漫画読み描き/OPアニメ愛好家/鉄</li></ul><p style="color:red" class="fragment">!!!全然ECMAScriptじゃない!!!</p></section><section data-markdown><script type="text/template">## ブラウザで動く言語色々
+1. ブラウザでいろいろなことが出来るようになった
+1. しかし言語はJavaScriptのみ???
+1. ネイティブと同じく色々な言語を使いたい!
+1. emscriptenとかあるし!
+
+「ブラウザで動く(JavaScript以外の)言語」をおさらいしてみよう！
+</script></section><section data-markdown><script type="text/template">## いにしえの先駆者たち
+～ プラグインならなんでもできる ～
+</script></section><section data-markdown><script type="text/template">## Java
+(1995-)
+- ほぼ完全なJava環境「Javaアプレット」
+- Javaインストールで使えるようになる感じ
+- 普及率は割と高い
+
+EdgeとChromeではもう使えない
+</script></section><section data-markdown><script type="text/template">## VBScript / JScript
+(1996-)
+- Internet Explorer 3.0から動作する
+- JScriptは JavaScript+COMサポート 的なもの
+- VBScriptはVBベース
+```
+<SCRIPT LANGUAGE="VBScript">
+```
+
+IEのみでしか動かない(Edgeではサポート外)
+</script></section><section data-markdown><script type="text/template">## ActionScript
+(2001-)
+- Flash 5から搭載
+- ECMAScriptの拡張で、1.0はプロトタイプベース
+- iOS, Android>=4.1標準ブラウザでは利用不可
+- とはいえ依然普及率は非常に高い
+- Flash→HTML5変換ツールが色々
+
+スマートフォン用デフォルトブラウザで動作不可
+</script></section><section data-markdown><script type="text/template">### C# / F# / VB.NET / JScript.NET / (Iron)Ruby / (Iron)Python / PHP / PowerShell / Boo
+(2007-)
+- Silverlightにより.NET上の言語が走りまくる
+- 環境普及率はいまいち
+
+EdgeとChromeではもう使えない
+
+Firefox等も順次サポート終了
+</script></section><section><h3>JavaScriptが再ブレイクする前にも意外と沢山の(主にMS系)言語が走ってた</h3></section><section><h2>JavaScript上で走る言語</h2>～ JavaScriptはasmなのか ～</section><section data-markdown><script type="text/template">## AltJS勢
+CoffeeScript/TypeScript/Haxe/Dart/JSX(DeNAのもの)/etc...
+- JavaScript生成言語たち
+- ES2015以降TS以外下火感
+- 事前/実行時コンパイル
+</script></section><section data-markdown><script type="text/template">## ECMAScript 2015
+～ Yet another AltJS ～
+- Edge、Chrome、Firefox以外対応のためコンパイル必要
+- 特に長く生き残る可能性のあるIE11がほとんど非対応
+
+公式(?)なのに実質半分AltJS状態
+
+<p class="fragment">ネットプログラマー奈良阪はWin10強制アップデートを応援しています（ぉ
+</script></section><section data-markdown><script type="text/template">## ActionScript
+
+### Randori
+- ActionScriptをJavaScriptに変換するフレームワーク
+- jQueryなども使えるがActionScriptに変換したものを利用する模様
+
+### その他Flash->HTML5変換ツール
+- 色々
+</script></section><section data-markdown><script type="text/template">## C
+
+### [emscripten](http://kripken.github.io/emscripten-site/)
+- clangでLLVM-IRにしてからJavaScriptにコンパイル(emcc)
+- 結構大規模なものも動く
+- 事前コンパイルのみ
+
+### [tcc-for-emscripten](https://github.com/kungfooman/tcc-for-emscripten)
+- コンパイルが超早いtccをemscriptenに載せたらブラウザ上実行時コンパイル的な使用感でCが動くんじゃね？
+- という発想は誰もがすると思うが、難しいのか動いてなさげ
+</script></section><section data-markdown><script type="text/template">## C++
+
+### emscripten
+- Cと同じく
+- これがあるおかげでC/C++で作られたものが色々ブラウザで動くようになったロマン装置
+</script></section><section data-markdown><script type="text/template">## Objective-C?
+
+### emscripten?
+- emccみたいな専用ツールはないが、LLVM-IRに変換するとできそうみたいな記事がある
+- [主にLLVMを使用しています](http://sassembla.github.io/Public/2012:12:18%2000-00-00/2012:12:18%2000-00-00.html)
+</script></section><section data-markdown><script type="text/template">## Fortran
+
+[Use Emscripten with Fortran: LAPACK binding (Stack Overflow)](http://stackoverflow.com/questions/21990243/use-emscripten-with-fortran-lapack-binding)
+
+これもclangでllvm-irにしてからemscriptenかます方法でいけるらしいですよ!
+
+LLVM最強伝説
+</script></section><section data-markdown><script type="text/template">## D
+
+### [EmscriptenとLDCを使えばD言語のSDLゲームがブラウザで動かせる、かも](http://aba.hatenablog.com/entry/20130331/p1)
+- LDCというD->LLVMコンパイラ+emscriptenでできたという報告がありまぁす！
+
+LLVM最強伝説
+</script></section><section data-markdown><script type="text/template"><h2>C#</h2>
+
+### Unity
+- C# -(Mono)-> CIL -(IL2CPP)-> C++ -(emscripten)-> JavaScript
+- ロマン変換。すごい。
+- Unity付属で、単体で使うことはできない
+
+### [JSIL](http://jsil.org/)
+- .NETプログラムをCILからJavaScriptに変換する
+- C#に限らず.NET上の言語に使える模様
+
+どちらも事前コンパイルのみ
+</script></section><section data-markdown><script type="text/template">## Java
+- [Doppio](http://doppiojvm.org/)というJavaScript上で動くJREがあるらしく、動く
+- 事前コンパイルのみ?
+</script></section><section data-markdown><script type="text/template">## Scala
+- JVM言語
+- AltJSのように中間言語を通さずJavaScriptにコンパイルする形式
+- 事前コンパイルのみ?
+</script></section><section data-markdown><script type="text/template">## Kotlin
+- JVM言語
+- AltJSのように中間言語を通さずJavaScriptにコンパイルする形式
+- 事前コンパイルのみ?
+</script></section><section data-markdown><script type="text/template">## Ceylon
+- JVM言語
+- AltJSのように中間言語を通さずJavaScriptにコンパイルする形式
+- 事前コンパイルのみ?
+```
+ceylon compile-js unit1.ceylon unit2.ceylon some_native_stuff.js unit3.ceylon
+```
+</script></section><section data-markdown><script type="text/template">## Lua
+
+- [lua.vm.js](https://kripken.github.io/lua.vm.js/lua.vm.js.html)
+- 完品のLuaが動くうえにJavaScriptとの連携もできる
+
+```
+local window = js.global -- global object in JS is the window
+window:alert("hello from lua!")
+window:setTimeout(function() print('hello from lua callback') end, 2500)
+```
+</script></section><section data-markdown><script type="text/template">## Perl
+
+### [Perlito](https://github.com/fglock/Perlito)
+- Perl5とPerl6をJavaScriptにコンパイル可能
+- miniperlベースなのでCバインディング以外は動く
+
+### その他
+- [perl.js](https://github.com/gfx/perl.js) / [plu](https://github.com/harsha-mudi/plu)
+- microperl 5.16 (CPAN/POSIX/XS/Bundled 抜きのperl)ベース
+- 2、3年前のもので止まっている
+
+両方とも実行時コンパイル可能
+</script></section><section data-markdown><script type="text/template">## Ruby
+
+### [Opal](http://opalrb.org/)
+- Rubyがそこそこ読めるJavaScriptにコンパイルされる
+- ブラウザ側のランタイムが若干貧弱
+- node.js用もある
+- 実行時コンパイル対応
+
+### ([Volt](http://voltframework.com/))
+- サーバー・クライアント共にRubyで書くWAF (Opal利用)
+- Ruby版[Meteor](https://www.meteor.com)のような趣がある
+</script></section><section data-markdown><script type="text/template">## Python
+
+### Brython
+- Python3でJSを置き換えようという野心的プロジェクト
+
+```
+<script type="text/python3" src="test.py">
+import time
+import math
+import datetime
+from browser import document as doc
+import browser.timer
+...
+```
+
+### PythonScript / Pyjaco / Pyjs
+
+何故だかたくさんある　違いがわからん
+
+多分どれも実行時コンパイル対応
+</script></section><section data-markdown><script type="text/template">## PHP
+
+### php.js
+- PHP VMをブラウザで動かす
+- stdoutもconsole.logなどではなく変数に入るあたりが特徴か？
+
+```
+var engine = new PHP ('<?php echo "Hello world!"; ?>');
+console.log( engine.vm.OUTPUT_BUFFER); // the outputted buffer from the script
+```
+</script></section><section data-markdown><script type="text/template">## Tcl
+
+### [tcl.js](https://github.com/cyanogilvie/Tcl.js)
+- tclのサブセット
+- 実行時コンパイル
+</script></section><section data-markdown><script type="text/template">## Erlang
+
+### [shen](https://github.com/synrc/shen)
+- Erlangのmatcherと末尾再帰とFRPとか使える状態でJSにコンパイル
+- `-js(...)`でJavaScript側に関数をエクスポートできる
+
+```
+$ erlc shen.erl
+$ erlc -pa . fac.erl
+```
+</script></section><section data-markdown><script type="text/template">## Haskell
+
+### [ghcjs](https://github.com/ghcjs/ghcjs)
+- 事前コンパイル
+- Haskellランタイムを含むでかいファイルになる
+
+### [haste](http://haste-lang.org/)
+- ghcjsよりJavaScriptとの接続がスムーズそう
+
+### fay / purescript / elm / idris(昔動いた)
+- サブセットとかHaskell似とか思想は似ているとか有象無象
+</script></section><section data-markdown><script type="text/template">## Go
+
+### [GopherJS](https://github.com/gopherjs/gopherjs)
+- ほぼ全て(Nearly everything)に対応
+- Enjというこれをつかったゲームエンジンが存在
+- 実行時コンパイル対応
+</script></section><section data-markdown><script type="text/template">## Swift
+
+### [ShiftJS](http://shiftjs.com/#/home)
+- 実行時コンパイル可能
+- print()などはconsole.log()などに変換される
+</script></section><section data-markdown><script type="text/template">## Delphi/Pascal
+
+### [p2js](http://p2js.gelicon.biz/en)
+- Delphiで作られたGUIプログラムをそのままJavaScriptで実行可能な模様
+- 可読可能なJavaScriptが吐かれる系
+</script></section><section data-markdown><script type="text/template">## HSP
+
+### [hsp3dish.js](http://www.onionsoft.net/hsp/v34/doclib/hsp3dish_js.htm)
+- WebGLサポートブラウザ(最近の大体全部)上で動作するHSP3Dishのランタイム
+- LLVM, emscriptenを使っているとのこと
+</script></section><section data-markdown><script type="text/template">## Gnuplot
+- 科学系とかで使われるグラフ描画ソフトウェア
+
+### [gnuplot-js](https://github.com/chhu/gnuplot-JS)
+- emscriptenでブラウザ対応をしたもの
+- データとgnuplotのコードを入れればブラウザ上でsvgやpngが生成できる
+</script></section><section data-markdown><script type="text/template">## VimScript
+
+### [vim-vimlparser](http://chikatoike.github.io/vim-vimlparser/)
+- 色々不完全らしいがそれっぽく変換できてはいる
+- DOMとかは使えなさそうなので内部処理のみ実装可能そう
+</script></section><section data-markdown><script type="text/template">## なでしこ
+
+### [Javascript なでしこ（もどき）](http://blog.bz2.jp/archives/2005/09/javascript_4.html)
+- 2005年に作られたkmyaccの試用目的に作られたプロジェクトっぽい
+- 「計算／文字列／alert／変数」しか実装してないとのことで実用には使えなさそう
+</script></section><section data-markdown><script type="text/template">## etc...
+他にも色々ありそうだけど、時間切れなので終了!
+
+
+
+</script></section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script>// Full list of configuration options available at:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controls: true,
+progress: true,
+history: true,
+center: true,
+transition: 'slide', // none/fade/slide/convex/concave/zoom
+// Optional reveal.js plugins
+dependencies: [
+{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+{ src: 'plugin/zoom-js/zoom.js', async: true },
+{ src: 'plugin/notes/notes.js', async: true }
+]
+});</script></body></html>
